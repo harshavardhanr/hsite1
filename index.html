@@ -151,6 +151,9 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .project-card:nth-child(2n) .project-image {
@@ -163,6 +166,24 @@
 
         .project-card:nth-child(4n) .project-image {
             background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .placeholder-text {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            text-align: center;
+            padding: 20px;
         }
 
         .project-image::before {
@@ -518,7 +539,12 @@
                     <h2 class="section-title fade-in">Selected Projects</h2>
                     <div class="projects-grid">
                         <div class="project-card fade-in" onclick="showPage('project1')">
-                            <div class="project-image"></div>
+                            <div class="project-image">
+                                <!-- Replace src with your actual image URL -->
+                                <img src="https://via.placeholder.com/600x300/667eea/ffffff?text=Nexus+Brand+Identity" alt="Nexus Brand Identity Project" />
+                                <!-- Fallback if no image -->
+                                <!-- <div class="placeholder-text">Add your project image here</div> -->
+                            </div>
                             <div class="project-info">
                                 <h3 class="project-title">Nexus Brand Identity</h3>
                                 <p class="project-description">Complete brand transformation for a tech startup, including logo design, visual identity, and digital presence.</p>
@@ -531,7 +557,10 @@
                         </div>
 
                         <div class="project-card fade-in" onclick="showPage('project2')">
-                            <div class="project-image"></div>
+                            <div class="project-image">
+                                <!-- Replace with your image -->
+                                <img src="https://via.placeholder.com/600x300/f093fb/ffffff?text=Elevate+Platform" alt="Elevate Digital Platform" />
+                            </div>
                             <div class="project-info">
                                 <h3 class="project-title">Elevate Digital Platform</h3>
                                 <p class="project-description">End-to-end digital platform design for a fitness company, featuring modern UX/UI and seamless user experience.</p>
@@ -544,7 +573,10 @@
                         </div>
 
                         <div class="project-card fade-in" onclick="showPage('project3')">
-                            <div class="project-image"></div>
+                            <div class="project-image">
+                                <!-- Replace with your image -->
+                                <img src="https://via.placeholder.com/600x300/4facfe/ffffff?text=Aurora+Campaign" alt="Aurora Creative Campaign" />
+                            </div>
                             <div class="project-info">
                                 <h3 class="project-title">Aurora Creative Campaign</h3>
                                 <p class="project-description">Award-winning creative campaign combining art direction, motion graphics, and strategic brand storytelling.</p>
@@ -557,7 +589,10 @@
                         </div>
 
                         <div class="project-card fade-in" onclick="showPage('project4')">
-                            <div class="project-image"></div>
+                            <div class="project-image">
+                                <!-- Replace with your image -->
+                                <img src="https://via.placeholder.com/600x300/43e97b/ffffff?text=Flow+Motion" alt="Flow Motion Graphics" />
+                            </div>
                             <div class="project-info">
                                 <h3 class="project-title">Flow Motion Graphics</h3>
                                 <p class="project-description">Dynamic motion design series for brand communication, featuring cutting-edge animation and visual storytelling.</p>
@@ -832,7 +867,10 @@
                     </div>
                 </div>
 
-                <div class="project-hero-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                <div class="project-hero-image">
+                    <!-- Replace with your actual project hero image -->
+                    <img src="https://via.placeholder.com/1200x500/667eea/ffffff?text=Nexus+Brand+Identity+Hero" alt="Nexus Brand Identity Hero Image" />
+                </div>
 
                 <div class="project-content">
                     <div class="content-sidebar">
@@ -855,13 +893,38 @@
                             <p>The logo design represents the concept of connection and networking through geometric forms that suggest both technological precision and organic growth. The color palette combines deep blues with vibrant accents to convey trust and innovation.</p>
                             <p>We created a flexible visual system that works across digital and print applications, ensuring consistent brand recognition across all customer touchpoints.</p>
                         </div>
+
+                        <!-- Video Example -->
+                        <div class="video-container">
+                            <!-- Option 1: YouTube/Vimeo Embed -->
+                            <!-- <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe> -->
+                            
+                            <!-- Option 2: Direct Video File -->
+                            <!-- <video controls poster="path/to/video-thumbnail.jpg">
+                                <source src="path/to/your-video.mp4" type="video/mp4">
+                                <source src="path/to/your-video.webm" type="video/webm">
+                                Your browser does not support the video tag.
+                            </video> -->
+                            
+                            <!-- Placeholder for now -->
+                            <div style="display: flex; align-items: center; justify-content: center; height: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-size: 1.2rem;">
+                                Add your project video here
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="project-gallery">
-                    <div class="gallery-item" style="background: linear-gradient(45deg, #667eea, #764ba2);"></div>
-                    <div class="gallery-item" style="background: linear-gradient(45deg, #764ba2, #667eea);"></div>
-                    <div class="gallery-item" style="background: linear-gradient(45deg, #667eea, #764ba2);"></div>
+                    <!-- Replace these with your actual gallery images -->
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/400x300/667eea/ffffff?text=Gallery+Image+1" alt="Project Gallery Image 1" />
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/400x300/764ba2/ffffff?text=Gallery+Image+2" alt="Project Gallery Image 2" />
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/400x300/667eea/ffffff?text=Gallery+Image+3" alt="Project Gallery Image 3" />
+                    </div>
                 </div>
 
                 <div class="content-section">
