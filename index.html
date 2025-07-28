@@ -387,6 +387,45 @@
             color: var(--text-secondary);
         }
 
+        /* Project Images */
+        .project-images {
+            margin: 2rem 0;
+        }
+
+        .project-image-full {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .project-image-full:hover {
+            transform: scale(1.02);
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-image-half {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .project-image-half:hover {
+            transform: scale(1.02);
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-container {
@@ -412,6 +451,18 @@
 
             .project-meta {
                 grid-template-columns: 1fr;
+            }
+
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-image-full {
+                height: 250px;
+            }
+
+            .project-image-half {
+                height: 200px;
             }
         }
 
@@ -780,6 +831,110 @@
                             <li>60% increase in goal-setting feature usage</li>
                             <li>4.7 star rating in app stores (up from 3.2)</li>
                         </ul>
+                    </div>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Visual Design Process</h2>
+                        <div class="project-images">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&auto=format" alt="User research session with sticky notes and personas" class="project-image-full">
+                            <div class="image-grid">
+                                <img src="https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=400&h=300&fit=crop&auto=format" alt="Mobile app wireframes and sketches" class="project-image-half">
+                                <img src="https://images.unsplash.com/photo-1560472355-536de3962603?w=400&h=300&fit=crop&auto=format" alt="Final mobile app interface showing dashboard" class="project-image-half">
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=500&fit=crop&auto=format" alt="User testing session with participant using mobile app" class="project-image-full">
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Design Journey</h2>
+                        <div class="project-images">
+                            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=600&fit=crop&auto=format" alt="Healthcare professionals discussing telemedicine workflow" class="project-image-full">
+                            <div class="image-grid">
+                                <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop&auto=format" alt="Video call interface wireframes and user flow diagrams" class="project-image-half">
+                                <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=300&fit=crop&auto=format" alt="Final telemedicine platform interface on desktop" class="project-image-half">
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?w=800&h=500&fit=crop&auto=format" alt="Doctor using the platform for patient consultation" class="project-image-full">
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Design Evolution</h2>
+                        <div class="project-images">
+                            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop&auto=format" alt="E-commerce analytics dashboard showing conversion funnel" class="project-image-full">
+                            <div class="image-grid">
+                                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop&auto=format" alt="Before and after checkout flow comparison" class="project-image-half">
+                                <img src="https://images.unsplash.com/photo-1556742393-d75f468bfcb0?w=400&h=300&fit=crop&auto=format" alt="Mobile shopping interface with improved navigation" class="project-image-half">
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=500&fit=crop&auto=format" alt="Customer using mobile app for seamless checkout" class="project-image-full">
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>From Concept to Launch</h2>
+                        <div class="project-images">
+                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop&auto=format" alt="Students collaborating on learning platform during user testing" class="project-image-full">
+                            <div class="image-grid">
+                                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&h=300&fit=crop&auto=format" alt="Gamification wireframes showing progress tracking and badges" class="project-image-half">
+                                <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=300&fit=crop&auto=format" alt="Final learning app interface with achievements and social features" class="project-image-half">
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=800&h=500&fit=crop&auto=format" alt="Student successfully completing course on mobile device" class="project-image-full">
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Data Visualization Journey</h2>
+                        <div class="project-images">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&auto=format" alt="Data analysts reviewing complex dashboard layouts and user feedback" class="project-image-full">
+                            <div class="image-grid">
+                                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop&auto=format" alt="Dashboard wireframes showing information hierarchy" class="project-image-half">
+                                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop&auto=format" alt="Final analytics dashboard with clean data visualizations" class="project-image-half">
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=800&h=500&fit=crop&auto=format" alt="Business team making decisions using the new dashboard" class="project-image-full">
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Building Authentic Connections</h2>
+                        <div class="project-images">
+                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop&auto=format" alt="Diverse group of people connecting through shared interests" class="project-image-full">
+                            <div class="image-grid">
+                                <img src="https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=400&h=300&fit=crop&auto=format" alt="Community feature wireframes and user journey maps" class="project-image-half">
+                                <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop&auto=format" alt="Social app interface showing interest-based communities" class="project-image-half">
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=500&fit=crop&auto=format" alt="Users engaging in meaningful conversations through the app" class="project-image-full">
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Designing for Adventure</h2>
+                        <div class="project-images">
+                            <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=600&fit=crop&auto=format" alt="Travel planning session with maps, itineraries, and mobile devices" class="project-image-full">
+                            <div class="image-grid">
+                                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400&h=300&fit=crop&auto=format" alt="AI recommendation algorithm wireframes and user flows" class="project-image-half">
+                                <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop&auto=format" alt="Travel app interface showing personalized itinerary" class="project-image-half">
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=500&fit=crop&auto=format" alt="Travelers using the app to discover and book experiences" class="project-image-full">
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Unifying the Work Experience</h2>
+                        <div class="project-images">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop&auto=format" alt="Modern office team collaborating using integrated productivity tools" class="project-image-full">
+                            <div class="image-grid">
+                                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400&h=300&fit=crop&auto=format" alt="Workflow integration diagrams and user research insights" class="project-image-half">
+                                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop&auto=format" alt="Unified workspace interface with seamless tool integration" class="project-image-half">
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&h=500&fit=crop&auto=format" alt="Enterprise team achieving higher productivity with the new platform" class="project-image-full">
+                        </div>
                     </div>
                 `
             },
