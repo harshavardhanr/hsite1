@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Digital Creative</title>
+    <title>Alex Chen - UX Designer</title>
     <style>
         * {
             margin: 0;
@@ -11,431 +11,411 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #8b5cf6;
+            --primary-dark: #7c3aed;
+            --secondary: #f472b6;
+            --accent: #06b6d4;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-light: #94a3b8;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-accent: #334155;
+            --border: #475569;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
         body {
-            background: #000;
-            color: #fff;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
             overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        .main {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        .page {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 2rem;
         }
 
-        /* Navigation */
-        nav {
-            position: fixed;
+        /* Home Page */
+        .hero {
+            display: flex;
+            align-items: center;
+            min-height: 80vh;
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e40af 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 20px 0;
-            border-bottom: 1px solid #333;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
         }
 
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            color: #888;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: #fff;
-        }
-
-        /* Page styles */
-        .page {
-            display: none;
-            min-height: 100vh;
-            padding-top: 100px;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        /* Header */
-        header {
-            padding: 40px 0;
-        }
-
-        .hero {
-            text-align: center;
-            padding: 100px 0;
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 8vw, 8rem);
-            font-weight: 300;
-            letter-spacing: -0.02em;
-            margin-bottom: 30px;
-            background: linear-gradient(45deg, #fff, #888);
-            background-clip: text;
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff, #e2e8f0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: fadeInUp 1s ease-out;
+            background-clip: text;
         }
 
         .hero p {
-            font-size: 1.2rem;
-            color: #888;
-            max-width: 600px;
-            margin: 0 auto;
-            animation: fadeInUp 1s ease-out 0.3s both;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: rgba(139, 92, 246, 0.2);
+            border: 2px solid rgba(139, 92, 246, 0.5);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: rgba(139, 92, 246, 0.4);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
         }
 
         /* Projects Grid */
-        .projects {
-            padding: 100px 0;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 60px;
-            text-align: center;
-            color: #fff;
-        }
-
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 40px;
-            margin-bottom: 80px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
         }
 
         .project-card {
-            background: #111;
-            border-radius: 12px;
+            background: var(--bg-secondary);
+            border-radius: 20px;
             overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: all 0.3s ease;
             cursor: pointer;
-            position: relative;
+            border: 1px solid var(--border);
         }
 
         .project-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            border-color: var(--primary);
         }
 
         .project-image {
-            width: 100%;
-            height: 300px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            position: relative;
-            overflow: hidden;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .project-card:nth-child(2n) .project-image {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        }
-
-        .project-card:nth-child(3n) .project-image {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        }
-
-        .project-card:nth-child(4n) .project-image {
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-        }
-
-        .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .project-card:hover .project-image img {
-            transform: scale(1.05);
-        }
-
-        .placeholder-text {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1rem;
-            text-align: center;
-            padding: 20px;
+            color: white;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
         }
 
         .project-image::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            transition: transform 0.3s ease;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
         }
 
-        .project-card:hover .project-image::before {
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .project-info {
-            padding: 30px;
+        .project-content {
+            padding: 1.5rem;
         }
 
         .project-title {
             font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #fff;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
         }
 
         .project-description {
-            color: #888;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            margin-bottom: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
         }
 
         .project-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 0.5rem;
         }
 
         .tag {
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            padding: 4px 12px;
+            padding: 0.25rem 0.75rem;
+            background: var(--bg-accent);
             border-radius: 20px;
-            font-size: 0.8rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            border: 1px solid var(--border);
         }
 
-        /* Project Detail Page Styles */
+        /* Project Detail Page */
         .project-detail {
-            padding: 60px 0;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
         }
 
         .project-header {
             text-align: center;
-            margin-bottom: 80px;
+            margin-bottom: 3rem;
         }
 
         .project-header h1 {
-            font-size: clamp(2.5rem, 6vw, 5rem);
-            font-weight: 300;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, #fff, #888);
-            background-clip: text;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-
-        .project-subtitle {
-            font-size: 1.3rem;
-            color: #888;
-            margin-bottom: 30px;
+            background-clip: text;
         }
 
         .project-meta {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            margin-bottom: 60px;
-        }
-
-        .meta-item {
-            text-align: center;
-        }
-
-        .meta-label {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-        }
-
-        .meta-value {
-            color: #fff;
-            font-weight: 600;
-        }
-
-        .project-hero-image {
-            width: 100%;
-            height: 500px;
-            border-radius: 12px;
-            margin-bottom: 80px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-content {
             display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 60px;
-            margin-bottom: 80px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border-radius: 15px;
         }
 
-        .content-sidebar h3 {
-            color: #fff;
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-        }
-
-        .content-sidebar p {
-            color: #888;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        .content-main {
-            display: grid;
-            gap: 40px;
-        }
-
-        .content-section h3 {
-            color: #fff;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-
-        .content-section p {
-            color: #888;
-            line-height: 1.7;
-            margin-bottom: 20px;
-        }
-
-        .project-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 60px 0;
-        }
-
-        .gallery-item {
-            height: 300px;
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
+        .meta-item h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
         }
 
         .back-button {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            color: #888;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
             text-decoration: none;
-            font-size: 1rem;
-            margin-bottom: 40px;
-            transition: color 0.3s ease;
-        }
-
-        .back-button:hover {
-            color: #fff;
-        }
-
-        /* Archive Section */
-        .archive {
-            background: #0a0a0a;
-            padding: 100px 0;
-        }
-
-        .archive-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .archive-item {
-            padding: 20px;
-            border-bottom: 1px solid #222;
+            border-radius: 10px;
+            font-weight: 600;
             transition: all 0.3s ease;
+            margin-bottom: 2rem;
             cursor: pointer;
         }
 
-        .archive-item:hover {
-            background: #111;
-            transform: translateX(10px);
+        .back-button:hover {
+            background: var(--primary-dark);
+            transform: translateX(-2px);
         }
 
-        .archive-title {
-            font-size: 1.1rem;
-            color: #fff;
-            margin-bottom: 5px;
+        /* About Page */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
         }
 
-        .archive-desc {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 150px 0;
+        .about-header {
             text-align: center;
-            background: radial-gradient(circle at center, #111 0%, #000 100%);
+            margin-bottom: 3rem;
         }
 
-        .contact h2 {
-            font-size: clamp(3rem, 6vw, 6rem);
-            font-weight: 300;
-            margin-bottom: 40px;
-            background: linear-gradient(45deg, #fff, #666);
-            background-clip: text;
+        .about-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .contact-info {
-            font-size: 1.2rem;
-            color: #888;
-            margin-bottom: 40px;
+        .about-section {
+            margin-bottom: 3rem;
         }
 
-        .cta-button {
-            display: inline-block;
-            padding: 15px 40px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
+        .about-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary);
         }
 
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-            border-color: rgba(255, 255, 255, 0.2);
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
 
-        /* Animations */
+        .skill-category {
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
+            border: 1px solid var(--border);
+        }
+
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 0.25rem 0;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .project-meta {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -447,644 +427,754 @@
             }
         }
 
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .projects-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .project-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            
-            .project-meta {
-                gap: 20px;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .hero {
-                padding: 60px 0;
-            }
-            
-            .projects {
-                padding: 60px 0;
-            }
-            
-            .contact {
-                padding: 100px 0;
-            }
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #000;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
+        .animate-in {
+            animation: fadeInUp 0.6s ease forwards;
         }
     </style>
 </head>
 <body>
-    <nav>
+    <!-- Navigation -->
+    <nav class="nav">
         <div class="nav-container">
-            <a href="#" class="logo" onclick="showPage('home')">Your Name</a>
-            <div class="nav-links">
-                <a href="#" onclick="showPage('home')" class="nav-link active">Home</a>
-                <a href="#" onclick="scrollToSection('projects')" class="nav-link">Work</a>
-                <a href="#" onclick="scrollToSection('contact')" class="nav-link">Contact</a>
-            </div>
+            <div class="logo">Alex Chen</div>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showPage('home')" class="active">Home</a></li>
+                <li><a href="#" onclick="showPage('about')">About</a></li>
+            </ul>
         </div>
     </nav>
 
-    <!-- HOME PAGE -->
-    <div class="page active" id="home">
-        <header>
-            <div class="container">
-                <div class="hero">
-                    <h1>Your Name</h1>
-                    <p>Digital Creative & Art Director with over a decade of experience crafting exceptional visual experiences and innovative design solutions.</p>
-                </div>
-            </div>
-        </header>
-
-        <main>
-            <section class="projects" id="projects">
+    <main class="main">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <section class="hero">
                 <div class="container">
-                    <h2 class="section-title fade-in">Selected Projects</h2>
-                    <div class="projects-grid">
-                        <div class="project-card fade-in" onclick="showPage('project1')">
-                            <div class="project-image">
-                                <!-- Replace src with your actual image URL -->
-                                <img src="https://via.placeholder.com/600x300/667eea/ffffff?text=Nexus+Brand+Identity" alt="Nexus Brand Identity Project" />
-                                <!-- Fallback if no image -->
-                                <!-- <div class="placeholder-text">Add your project image here</div> -->
-                            </div>
-                            <div class="project-info">
-                                <h3 class="project-title">Nexus Brand Identity</h3>
-                                <p class="project-description">Complete brand transformation for a tech startup, including logo design, visual identity, and digital presence.</p>
-                                <div class="project-tags">
-                                    <span class="tag">Branding</span>
-                                    <span class="tag">UX/UI</span>
-                                    <span class="tag">Animation</span>
-                                </div>
+                    <div class="hero-content">
+                        <h1 class="animate-in">UX Designer</h1>
+                        <p class="animate-in">Creating meaningful digital experiences through user-centered design</p>
+                        <a href="#" onclick="showPage('about')" class="cta-button animate-in">Learn More About Me</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="container">
+                <h2 style="text-align: center; font-size: 2.5rem; margin: 3rem 0;">Featured Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card" onclick="showProject('fintech-app')">
+                        <div class="project-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">💳</div>
+                        <div class="project-content">
+                            <h3 class="project-title">FinTech Mobile App</h3>
+                            <p class="project-description">Redesigning the mobile banking experience with focus on accessibility and financial wellness</p>
+                            <div class="project-tags">
+                                <span class="tag">Mobile Design</span>
+                                <span class="tag">FinTech</span>
+                                <span class="tag">Accessibility</span>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="project-card fade-in" onclick="showPage('project2')">
-                            <div class="project-image">
-                                <!-- Replace with your image -->
-                                <img src="https://via.placeholder.com/600x300/f093fb/ffffff?text=Elevate+Platform" alt="Elevate Digital Platform" />
-                            </div>
-                            <div class="project-info">
-                                <h3 class="project-title">Elevate Digital Platform</h3>
-                                <p class="project-description">End-to-end digital platform design for a fitness company, featuring modern UX/UI and seamless user experience.</p>
-                                <div class="project-tags">
-                                    <span class="tag">Web Design</span>
-                                    <span class="tag">UX/UI</span>
-                                    <span class="tag">Development</span>
-                                </div>
+                    <div class="project-card" onclick="showProject('healthcare-platform')">
+                        <div class="project-image" style="background: linear-gradient(135deg, #f093fb, #f5576c);">🏥</div>
+                        <div class="project-content">
+                            <h3 class="project-title">Healthcare Platform</h3>
+                            <p class="project-description">Streamlining patient-doctor communication through an intuitive telemedicine platform</p>
+                            <div class="project-tags">
+                                <span class="tag">Web App</span>
+                                <span class="tag">Healthcare</span>
+                                <span class="tag">B2B</span>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="project-card fade-in" onclick="showPage('project3')">
-                            <div class="project-image">
-                                <!-- Replace with your image -->
-                                <img src="https://via.placeholder.com/600x300/4facfe/ffffff?text=Aurora+Campaign" alt="Aurora Creative Campaign" />
-                            </div>
-                            <div class="project-info">
-                                <h3 class="project-title">Aurora Creative Campaign</h3>
-                                <p class="project-description">Award-winning creative campaign combining art direction, motion graphics, and strategic brand storytelling.</p>
-                                <div class="project-tags">
-                                    <span class="tag">Art Direction</span>
-                                    <span class="tag">Campaign</span>
-                                    <span class="tag">Strategy</span>
-                                </div>
+                    <div class="project-card" onclick="showProject('ecommerce-redesign')">
+                        <div class="project-image" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">🛍️</div>
+                        <div class="project-content">
+                            <h3 class="project-title">E-commerce Redesign</h3>
+                            <p class="project-description">Increasing conversion rates through improved checkout flow and personalization</p>
+                            <div class="project-tags">
+                                <span class="tag">E-commerce</span>
+                                <span class="tag">Conversion</span>
+                                <span class="tag">Personalization</span>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="project-card fade-in" onclick="showPage('project4')">
-                            <div class="project-image">
-                                <!-- Replace with your image -->
-                                <img src="https://via.placeholder.com/600x300/43e97b/ffffff?text=Flow+Motion" alt="Flow Motion Graphics" />
+                    <div class="project-card" onclick="showProject('learning-platform')">
+                        <div class="project-image" style="background: linear-gradient(135deg, #fa709a, #fee140);">📚</div>
+                        <div class="project-content">
+                            <h3 class="project-title">Learning Platform</h3>
+                            <p class="project-description">Gamifying online education to increase student engagement and completion rates</p>
+                            <div class="project-tags">
+                                <span class="tag">EdTech</span>
+                                <span class="tag">Gamification</span>
+                                <span class="tag">Mobile-First</span>
                             </div>
-                            <div class="project-info">
-                                <h3 class="project-title">Flow Motion Graphics</h3>
-                                <p class="project-description">Dynamic motion design series for brand communication, featuring cutting-edge animation and visual storytelling.</p>
-                                <div class="project-tags">
-                                    <span class="tag">Motion Design</span>
-                                    <span class="tag">Animation</span>
-                                    <span class="tag">Video</span>
-                                </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card" onclick="showProject('saas-dashboard')">
+                        <div class="project-image" style="background: linear-gradient(135deg, #a8edea, #fed6e3);">📊</div>
+                        <div class="project-content">
+                            <h3 class="project-title">SaaS Analytics Dashboard</h3>
+                            <p class="project-description">Designing data visualization tools that help businesses make informed decisions</p>
+                            <div class="project-tags">
+                                <span class="tag">Data Viz</span>
+                                <span class="tag">SaaS</span>
+                                <span class="tag">Enterprise</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card" onclick="showProject('social-app')">
+                        <div class="project-image" style="background: linear-gradient(135deg, #ffecd2, #fcb69f);">👥</div>
+                        <div class="project-content">
+                            <h3 class="project-title">Social Networking App</h3>
+                            <p class="project-description">Building authentic connections through interest-based community features</p>
+                            <div class="project-tags">
+                                <span class="tag">Social</span>
+                                <span class="tag">Community</span>
+                                <span class="tag">Mobile</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card" onclick="showProject('travel-app')">
+                        <div class="project-image" style="background: linear-gradient(135deg, #ff9a9e, #fecfef);">✈️</div>
+                        <div class="project-content">
+                            <h3 class="project-title">Travel Planning App</h3>
+                            <p class="project-description">Simplifying trip planning with AI-powered recommendations and collaborative features</p>
+                            <div class="project-tags">
+                                <span class="tag">Travel</span>
+                                <span class="tag">AI/ML</span>
+                                <span class="tag">Collaboration</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card" onclick="showProject('productivity-suite')">
+                        <div class="project-image" style="background: linear-gradient(135deg, #a1c4fd, #c2e9fb);">⚡</div>
+                        <div class="project-content">
+                            <h3 class="project-title">Productivity Suite</h3>
+                            <p class="project-description">Unifying task management, calendar, and communication tools in one seamless experience</p>
+                            <div class="project-tags">
+                                <span class="tag">Productivity</span>
+                                <span class="tag">Enterprise</span>
+                                <span class="tag">Integration</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+        </div>
 
-            <section class="archive">
-                <div class="container">
-                    <h2 class="section-title fade-in">More Work Archive</h2>
-                    <div class="archive-grid fade-in">
-                        <div class="archive-item">
-                            <div class="archive-title">E-commerce Platform</div>
-                            <div class="archive-desc">UX/UI Design, Art Direction</div>
-                        </div>
-                        <div class="archive-item">
-                            <div class="archive-title">Mobile Application</div>
-                            <div class="archive-desc">Product Design, User Experience</div>
-                        </div>
-                        <div class="archive-item">
-                            <div class="archive-title">Brand Guidelines</div>
-                            <div class="archive-desc">Brand Identity, Visual Systems</div>
-                        </div>
-                        <div class="archive-item">
-                            <div class="archive-title">Marketing Website</div>
-                            <div class="archive-desc">Web Design, Content Strategy</div>
-                        </div>
-                        <div class="archive-item">
-                            <div class="archive-title">Digital Showreel</div>
-                            <div class="archive-desc">Motion Graphics, Video Production</div>
-                        </div>
-                        <div class="archive-item">
-                            <div class="archive-title">Corporate Identity</div>
-                            <div class="archive-desc">Logo Design, Brand Development</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="contact" id="contact">
-                <div class="container">
-                    <h2>Let's Work Together</h2>
-                    <p class="contact-info">Hiring me means gaining the value of over two decades of experience in the design industry.<br>I bring deep creative insight, strategic thinking, and proven ability to deliver impactful visual solutions.</p>
-                    <a href="mailto:hello@yourname.com" class="cta-button">Get In Touch</a>
-                </div>
-            </section>
-        </main>
-    </div>
-
-    <!-- PROJECT 1 PAGE -->
-    <div class="page" id="project1">
-        <div class="container">
-            <div class="project-detail">
-                <a href="#" class="back-button" onclick="showPage('home')">← Back to Work</a>
-                
-                <div class="project-header">
-                    <h1>Nexus Brand Identity</h1>
-                    <p class="project-subtitle">Complete brand transformation for a tech startup</p>
-                    
-                    <div class="project-meta">
-                        <div class="meta-item">
-                            <div class="meta-label">Year</div>
-                            <div class="meta-value">2024</div>
-                        </div>
-                        <div class="meta-item">
-                            <div class="meta-label">Role</div>
-                            <div class="meta-value">Motion Designer</div>
-                        </div>
-                        <div class="meta-item">
-                            <div class="meta-label">Duration</div>
-                            <div class="meta-value">2 Months</div>
-                        </div>
-                        <div class="meta-item">
-                            <div class="meta-label">Format</div>
-                            <div class="meta-value">Animation Series</div>
-                        </div>
-                    </div>
+        <!-- About Page -->
+        <div id="about" class="page">
+            <div class="about-content">
+                <div class="about-header">
+                    <h1>About Me</h1>
+                    <p style="font-size: 1.2rem; color: var(--text-secondary);">Passionate about creating user experiences that make a difference</p>
                 </div>
 
-                <div class="project-hero-image" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);"></div>
+                <div class="about-section">
+                    <h2>My Story</h2>
+                    <p>With over 5 years of experience in UX design, I've had the privilege of working with startups and Fortune 500 companies to create digital experiences that truly resonate with users. My background in psychology and technology gives me a unique perspective on how people interact with digital products.</p>
+                    <br>
+                    <p>I believe that great design isn't just about making things look beautiful—it's about solving real problems and making people's lives easier. Every project I work on starts with understanding the user's needs, frustrations, and goals.</p>
+                </div>
 
-                <div class="project-content">
-                    <div class="content-sidebar">
-                        <h3>Objective</h3>
-                        <p>Create a series of motion graphics that would elevate brand communication through fluid, organic animations that feel both technical and emotional.</p>
-                        
-                        <h3>Concept</h3>
-                        <p>The "Flow" series explores the intersection of data visualization and abstract art, creating animations that are both informative and aesthetically compelling.</p>
-                    </div>
-                    
-                    <div class="content-main">
-                        <div class="content-section">
-                            <h3>Animation Philosophy</h3>
-                            <p>Each animation in the Flow series is built on principles of natural movement - water, wind, and organic growth patterns. We studied fluid dynamics to create motion that feels intuitive and engaging.</p>
-                            <p>The technical challenge was creating complex animations that could scale across different platforms while maintaining their visual impact and smooth performance.</p>
+                <div class="about-section">
+                    <h2>My Approach</h2>
+                    <p>I follow a human-centered design process that emphasizes:</p>
+                    <br>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--primary);">🔍</span>
+                            <strong>Research First:</strong> Understanding users through interviews, surveys, and analytics
+                        </li>
+                        <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--primary);">💡</span>
+                            <strong>Collaborative Ideation:</strong> Working closely with stakeholders to generate creative solutions
+                        </li>
+                        <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--primary);">🎨</span>
+                            <strong>Iterative Design:</strong> Rapid prototyping and continuous refinement based on feedback
+                        </li>
+                        <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--primary);">🧪</span>
+                            <strong>Test and Validate:</strong> Using data and user testing to guide design decisions
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="about-section">
+                    <h2>Skills & Expertise</h2>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h3>Design Tools</h3>
+                            <ul class="skill-list">
+                                <li>Figma</li>
+                                <li>Sketch</li>
+                                <li>Adobe Creative Suite</li>
+                                <li>Principle</li>
+                                <li>InVision</li>
+                            </ul>
                         </div>
-                        
-                        <div class="content-section">
-                            <h3>Technical Innovation</h3>
-                            <p>We developed custom particle systems and procedural animation techniques that allowed for infinite variation while maintaining brand consistency. Each animation responds to data inputs, creating unique but cohesive results.</p>
-                            <p>The series utilizes advanced compositing techniques and custom shaders to achieve the signature flowing aesthetic that became the project's defining characteristic.</p>
+                        <div class="skill-category">
+                            <h3>Research & Testing</h3>
+                            <ul class="skill-list">
+                                <li>User Interviews</li>
+                                <li>Usability Testing</li>
+                                <li>A/B Testing</li>
+                                <li>Analytics (GA, Mixpanel)</li>
+                                <li>Survey Design</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Technical Skills</h3>
+                            <ul class="skill-list">
+                                <li>HTML/CSS</li>
+                                <li>Basic JavaScript</li>
+                                <li>Design Systems</li>
+                                <li>Responsive Design</li>
+                                <li>Accessibility (WCAG)</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Specializations</h3>
+                            <ul class="skill-list">
+                                <li>Mobile-First Design</li>
+                                <li>E-commerce UX</li>
+                                <li>SaaS Platforms</li>
+                                <li>Data Visualization</li>
+                                <li>Design Leadership</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-gallery">
-                    <div class="gallery-item" style="background: linear-gradient(45deg, #43e97b, #38f9d7);"></div>
-                    <div class="gallery-item" style="background: linear-gradient(45deg, #38f9d7, #43e97b);"></div>
-                    <div class="gallery-item" style="background: linear-gradient(45deg, #43e97b, #38f9d7);"></div>
-                </div>
-
-                <div class="content-section">
-                    <h3>Applications</h3>
-                    <p>The Flow motion graphics have been implemented across web platforms, social media, presentation decks, and large-scale digital installations. The modular system allows for easy customization while maintaining visual consistency.</p>
+                <div class="about-section">
+                    <h2>Let's Connect</h2>
+                    <p>I'm always excited to discuss new opportunities and collaborate on interesting projects. Whether you're looking for a UX designer or just want to chat about design, feel free to reach out!</p>
+                    <br>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <a href="mailto:alex@example.com" style="color: var(--primary); text-decoration: none; font-weight: 600;">📧 alex@example.com</a>
+                        <a href="#" style="color: var(--primary); text-decoration: none; font-weight: 600;">💼 LinkedIn</a>
+                        <a href="#" style="color: var(--primary); text-decoration: none; font-weight: 600;">🐦 Twitter</a>
+                        <a href="#" style="color: var(--primary); text-decoration: none; font-weight: 600;">📱 Dribbble</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <!-- Project Detail Template -->
+        <div id="project-detail" class="page">
+            <div class="project-detail">
+                <a href="#" onclick="showPage('home')" class="back-button">
+                    ← Back to Projects
+                </a>
+                <div class="project-header">
+                    <h1 id="project-title">Project Title</h1>
+                    <p id="project-subtitle" style="font-size: 1.2rem; color: var(--text-secondary);">Project subtitle</p>
+                </div>
+
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <h3>Role</h3>
+                        <p id="project-role">Lead UX Designer</p>
+                    </div>
+                    <div class="meta-item">
+                        <h3>Duration</h3>
+                        <p id="project-duration">3 months</p>
+                    </div>
+                    <div class="meta-item">
+                        <h3>Team</h3>
+                        <p id="project-team">4 people</p>
+                    </div>
+                    <div class="meta-item">
+                        <h3>Platform</h3>
+                        <p id="project-platform">Mobile & Web</p>
+                    </div>
+                </div>
+
+                <div id="project-content">
+                    <!-- Project content will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+    </main>
 
     <script>
-        // Page navigation
+        // Navigation functionality
         function showPage(pageId) {
             // Hide all pages
-            document.querySelectorAll('.page').forEach(page => {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
                 page.classList.remove('active');
             });
-            
+
             // Show selected page
-            document.getElementById(pageId).classList.add('active');
-            
-            // Update navigation
-            document.querySelectorAll('.nav-link').forEach(link => {
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+
+            // Update navigation active state
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => {
                 link.classList.remove('active');
             });
-            
-            if (pageId === 'home') {
-                document.querySelector('.nav-link[onclick="showPage(\'home\')"]').classList.add('active');
+
+            // Find and activate the corresponding nav link
+            const activeLink = document.querySelector(`[onclick="showPage('${pageId}')"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
             }
-            
+
             // Scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-            // Re-initialize animations for the new page
-            setTimeout(() => {
-                initializeAnimations();
-            }, 100);
+            window.scrollTo(0, 0);
         }
 
-        // Smooth scroll to section (for home page)
-        function scrollToSection(sectionId) {
-            // First ensure we're on the home page
-            showPage('home');
-            
-            // Then scroll to the section after a brief delay
-            setTimeout(() => {
-                const section = document.getElementById(sectionId);
-                if (section) {
-                    const navHeight = document.querySelector('nav').offsetHeight;
-                    const sectionTop = section.offsetTop - navHeight - 20;
-                    window.scrollTo({ 
-                        top: sectionTop, 
-                        behavior: 'smooth' 
-                    });
-                }
-            }, 300);
+        // Project data
+        const projects = {
+            'fintech-app': {
+                title: 'FinTech Mobile App',
+                subtitle: 'Redesigning mobile banking for financial wellness',
+                role: 'Lead UX Designer',
+                duration: '4 months',
+                team: '6 people (PM, Engineers, Data Analyst)',
+                platform: 'iOS & Android',
+                content: `
+                    <div class="about-section">
+                        <h2>The Challenge</h2>
+                        <p>A leading financial services company was experiencing declining user engagement and high churn rates in their mobile banking app. Users complained about complex navigation, lack of financial insights, and difficulty managing their money effectively.</p>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Research & Discovery</h2>
+                        <p>I conducted extensive user research including 25 user interviews, competitive analysis, and usability testing of the existing app. Key findings revealed that users wanted:</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                            <li>Clear financial overview and spending insights</li>
+                            <li>Simplified transaction categorization</li>
+                            <li>Proactive financial health recommendations</li>
+                            <li>Accessible design for users with disabilities</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Design Solution</h2>
+                        <p>I redesigned the app with a focus on financial wellness, featuring:</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                            <li><strong>Smart Dashboard:</strong> AI-powered spending insights and personalized recommendations</li>
+                            <li><strong>Goal Tracking:</strong> Visual progress indicators for savings and financial goals</li>
+                            <li><strong>Simplified Navigation:</strong> Reduced cognitive load with intuitive information architecture</li>
+                            <li><strong>Accessibility First:</strong> WCAG 2.1 AA compliance with voice control and screen reader support</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Results</h2>
+                        <p>The redesigned app launched to significant success:</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                            <li>45% increase in daily active users</li>
+                            <li>32% reduction in customer service calls</li>
+                            <li>60% increase in goal-setting feature usage</li>
+                            <li>4.7 star rating in app stores (up from 3.2)</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'healthcare-platform': {
+                title: 'Healthcare Platform',
+                subtitle: 'Connecting patients and doctors through telemedicine',
+                role: 'Senior UX Designer',
+                duration: '6 months',
+                team: '8 people (PM, Engineers, Medical Advisors)',
+                platform: 'Web Application',
+                content: `
+                    <div class="about-section">
+                        <h2>The Challenge</h2>
+                        <p>A healthcare startup needed to design a telemedicine platform that would streamline communication between patients and healthcare providers while ensuring HIPAA compliance and accessibility for users of all technical skill levels.</p>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Research & Discovery</h2>
+                        <p>I conducted research with both patients and healthcare providers through interviews, surveys, and workflow observations. Key insights included:</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                            <li>Patients wanted simple scheduling and clear communication</li>
+                            <li>Doctors needed efficient patient history access and documentation tools</li>
+                            <li>Both groups required reliable video calling with good audio quality</li>
+                            <li>Elderly patients needed extra consideration for accessibility</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Design Solution</h2>
+                        <p>I created a dual-interface platform optimized for both user types:</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                            <li><strong>Patient Portal:</strong> Simplified booking, prescription tracking, and medical records</li>
+                            <li><strong>Provider Dashboard:</strong> Comprehensive patient management and clinical tools</li>
+                            <li><strong>Video Consultation:</strong> Integrated high-quality video calls with screen sharing</li>
+                            <li><strong>Mobile Optimization:</strong> Responsive design for consultations on-the-go</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Results</h2>
+                        <p>The platform successfully launched and achieved:</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                            <li>95% patient satisfaction rate</li>
+                            <li>40% reduction in appointment no-shows</li>
+                            <li>25% increase in doctor efficiency</li>
+                            <li>Platform adoption by 150+ healthcare providers</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'ecommerce-redesign': {
+                title: 'E-commerce Redesign',
+                subtitle: 'Boosting conversion through improved UX',
+                role: 'UX Designer',
+                duration: '3 months',
+                team: '5 people (PM, Engineers, Marketing)',
+                platform: 'Web & Mobile Web',
+                content: `
+                    <div class="about-section">
+                        <h2>The Challenge</h2>
+                        <p>An established e-commerce retailer was experiencing a 68% cart abandonment rate and declining conversion rates. The existing checkout process was complex and mobile experience was poor.</p>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Research & Discovery</h2>
+                        <p>Through heatmap analysis, user session recordings, and A/B testing, I identified major pain points:</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                            <li>7-step checkout process with too many form fields</li>
+                            <li>Unclear shipping costs until final step</li>
+                            <li>Poor mobile navigation and product discovery</li>
+                            <li>Lack of trust signals and security indicators</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Design Solution</h2>
+                        <p>I redesigned the entire purchase flow with focus on conversion optimization:</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                            <li><strong>Streamlined Checkout:</strong> Reduced to 3 steps with guest checkout option</li>
+                            <li><strong>Transparent Pricing:</strong> Upfront shipping costs and total calculations</li>
+                            <li><strong>Mobile-First Design:</strong> Optimized product browsing and filtering</li>
+                            <li><strong>Trust Building:</strong> Customer reviews, security badges, and return policy</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Results</h2>
+                        <p>The redesign delivered significant improvements:</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                            <li>35% increase in conversion rate</li>
+                            <li>28% reduction in cart abandonment</li>
+                            <li>50% increase in mobile transactions</li>
+                            <li>$2.3M additional revenue in first quarter</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'learning-platform': {
+                title: 'Learning Platform',
+                subtitle: 'Gamifying education for better engagement',
+                role: 'UX Designer',
+                duration: '5 months',
+                team: '7 people (PM, Engineers, Education Specialists)',
+                platform: 'Mobile & Web',
+                content: `
+                    <div class="about-section">
+                        <h2>The Challenge</h2>
+                        <p>An EdTech startup was struggling with low course completion rates (15%) and poor user engagement. Students were dropping off after the first few lessons and not returning to continue their learning journey.</p>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Research & Discovery</h2>
+                        <p>I conducted user interviews with 30 students and analyzed learning behavior data. Key findings:</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                            <li>Students felt overwhelmed by long course structures</li>
+                            <li>Lack of progress visibility and achievement recognition</li>
+                            <li>No social elements or peer interaction</li>
+                            <li>Content felt monotonous without variety in learning formats</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Design Solution</h2>
+                        <p>I implemented a gamified learning experience with social elements:</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                            <li><strong>Micro-Learning:</strong> Bite-sized lessons with clear progress indicators</li>
+                            <li><strong>Achievement System:</strong> Badges, streaks, and leaderboards for motivation</li>
+                            <li><strong>Social Learning:</strong> Study groups, peer challenges, and discussion forums</li>
+                            <li><strong>Adaptive Content:</strong> Personalized learning paths based on performance</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Results</h2>
+                        <p>The gamified platform significantly improved learning outcomes:</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                            <li>72% increase in course completion rates</li>
+                            <li>3x improvement in daily active users</li>
+                            <li>65% of users maintained 7-day learning streaks</li>
+                            <li>89% user satisfaction in post-course surveys</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'saas-dashboard': {
+                title: 'SaaS Analytics Dashboard',
+                subtitle: 'Making complex data actionable',
+                role: 'Lead UX Designer',
+                duration: '4 months',
+                team: '6 people (PM, Engineers, Data Scientists)',
+                platform: 'Web Application',
+                content: `
+                    <div class="about-section">
+                        <h2>The Challenge</h2>
+                        <p>A B2B SaaS company needed to redesign their analytics dashboard. Users were struggling to extract meaningful insights from their data, leading to low feature adoption and customer churn.</p>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Research & Discovery</h2>
+                        <p>I conducted stakeholder interviews and user research with data analysts and business decision-makers:</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                            <li>Information overload with too many metrics displayed</li>
+                            <li>Difficulty identifying trends and actionable insights</li>
+                            <li>Poor data visualization choices hindering comprehension</li>
+                            <li>Lack of customization for different user roles</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Design Solution</h2>
+                        <p>I redesigned the dashboard focusing on clarity and actionability:</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                            <li><strong>Progressive Disclosure:</strong> Layered information architecture from overview to details</li>
+                            <li><strong>Smart Insights:</strong> AI-powered recommendations and anomaly detection</li>
+                            <li><strong>Role-Based Views:</strong> Customizable dashboards for different user types</li>
+                            <li><strong>Interactive Visualizations:</strong> Drill-down capabilities and contextual tooltips</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Results</h2>
+                        <p>The new dashboard drove significant business impact:</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                            <li>58% increase in feature usage and engagement</li>
+                            <li>42% reduction in support tickets related to data interpretation</li>
+                            <li>25% improvement in customer retention</li>
+                            <li>Featured in industry publications as best-in-class design</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'social-app': {
+                title: 'Social Networking App',
+                subtitle: 'Building authentic connections through shared interests',
+                role: 'UX Designer',
+                duration: '6 months',
+                team: '8 people (PM, Engineers, Community Manager)',
+                platform: 'iOS & Android',
+                content: `
+                    <div class="about-section">
+                        <h2>The Challenge</h2>
+                        <p>A startup wanted to create a social networking app that fostered genuine connections based on shared interests, moving away from the superficial interactions common in mainstream social media.</p>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Research & Discovery</h2>
+                        <p>Through user interviews and social media behavior analysis, I discovered:</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                            <li>Users craved meaningful conversations over likes and followers</li>
+                            <li>Interest-based communities were more engaging than broad social feeds</li>
+                            <li>Privacy and authenticity were major concerns</li>
+                            <li>Users wanted to discover like-minded people organically</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Design Solution</h2>
+                        <p>I designed a community-focused social platform with privacy-first approach:</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                            <li><strong>Interest Communities:</strong> Topic-based groups with quality discussion formats</li>
+                            <li><strong>Smart Matching:</strong> Algorithm connecting users with similar interests and values</li>
+                            <li><strong>Privacy Controls:</strong> Granular settings for content sharing and visibility</li>
+                            <li><strong>Authentic Interactions:</strong> Emphasis on meaningful comments over quick reactions</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Results</h2>
+                        <p>The app successfully launched with strong community engagement:</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                            <li>85% user retention after first month</li>
+                            <li>Average session duration of 23 minutes</li>
+                            <li>78% of users joined 3+ interest communities</li>
+                            <li>4.6 star rating with praise for authenticity</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'travel-app': {
+                title: 'Travel Planning App',
+                subtitle: 'AI-powered trip planning with collaborative features',
+                role: 'Senior UX Designer',
+                duration: '5 months',
+                team: '9 people (PM, Engineers, AI/ML Team)',
+                platform: 'Mobile & Web',
+                content: `
+                    <div class="about-section">
+                        <h2>The Challenge</h2>
+                        <p>A travel technology company wanted to create an app that would simplify the complex process of trip planning, especially for group travel, while providing personalized recommendations.</p>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Research & Discovery</h2>
+                        <p>I conducted research with frequent travelers and travel planning behavior studies:</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                            <li>Trip planning involved multiple tools and platforms</li>
+                            <li>Group coordination was the biggest pain point</li>
+                            <li>Users wanted personalized recommendations based on preferences</li>
+                            <li>Budget planning and expense tracking were essential features</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Design Solution</h2>
+                        <p>I designed an all-in-one travel planning platform with AI assistance:</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                            <li><strong>AI Trip Planner:</strong> Personalized itineraries based on preferences and budget</li>
+                            <li><strong>Collaborative Planning:</strong> Real-time group planning with voting and commenting</li>
+                            <li><strong>Smart Recommendations:</strong> Machine learning-powered suggestions for activities and dining</li>
+                            <li><strong>Integrated Booking:</strong> Seamless reservation system for flights, hotels, and activities</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Results</h2>
+                        <p>The app became a popular choice for travelers:</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                            <li>500K+ downloads in first 6 months</li>
+                            <li>73% of users planned multiple trips using the app</li>
+                            <li>92% satisfaction rate for AI-generated itineraries</li>
+                            <li>$15M in booking revenue generated through the platform</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'productivity-suite': {
+                title: 'Productivity Suite',
+                subtitle: 'Unifying work tools in one seamless experience',
+                role: 'Lead UX Designer',
+                duration: '8 months',
+                team: '12 people (PM, Engineers, Product Marketing)',
+                platform: 'Web, Desktop & Mobile',
+                content: `
+                    <div class="about-section">
+                        <h2>The Challenge</h2>
+                        <p>An enterprise software company needed to consolidate their separate productivity tools (task management, calendar, messaging, file sharing) into one unified platform to reduce app switching and improve team collaboration.</p>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Research & Discovery</h2>
+                        <p>I conducted extensive research with enterprise teams and productivity workflows:</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                            <li>Workers switched between 9.4 apps on average per day</li>
+                            <li>Context switching reduced productivity by 23%</li>
+                            <li>Teams struggled with scattered information and communications</li>
+                            <li>Different departments had varying workflow requirements</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Design Solution</h2>
+                        <p>I designed a modular productivity platform with intelligent integrations:</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                            <li><strong>Unified Interface:</strong> Single workspace with contextual tool switching</li>
+                            <li><strong>Smart Notifications:</strong> Intelligent filtering and priority-based alerts</li>
+                            <li><strong>Cross-Tool Integration:</strong> Seamless data flow between tasks, calendar, and communications</li>
+                            <li><strong>Customizable Workspaces:</strong> Team-specific layouts and workflow optimization</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Results</h2>
+                        <p>The unified platform delivered significant productivity gains:</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                            <li>34% reduction in time spent switching between tools</li>
+                            <li>89% adoption rate across enterprise customers</li>
+                            <li>46% improvement in team collaboration scores</li>
+                            <li>ROI of 312% for enterprise customers within first year</li>
+                        </ul>
+                    </div>
+                `
+            }
+        };
+
+        function showProject(projectId) {
+            const project = projects[projectId];
+            if (!project) return;
+
+            // Update project details
+            document.getElementById('project-title').textContent = project.title;
+            document.getElementById('project-subtitle').textContent = project.subtitle;
+            document.getElementById('project-role').textContent = project.role;
+            document.getElementById('project-duration').textContent = project.duration;
+            document.getElementById('project-team').textContent = project.team;
+            document.getElementById('project-platform').textContent = project.platform;
+            document.getElementById('project-content').innerHTML = project.content;
+
+            // Show project detail page
+            showPage('project-detail');
         }
 
-        // Initialize animations
-        function initializeAnimations() {
-            // Intersection Observer for fade-in animations
+        // Add smooth scrolling and animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate elements on scroll
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
             };
 
-            const observer = new IntersectionObserver((entries) => {
+            const observer = new IntersectionObserver(function(entries) {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
+                        entry.target.classList.add('animate-in');
                     }
                 });
             }, observerOptions);
 
-            // Observe all fade-in elements
-            document.querySelectorAll('.fade-in').forEach(el => {
-                el.classList.remove('visible'); // Reset visibility
-                observer.observe(el);
-            });
-        }
-
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeAnimations();
-            
-            // Add subtle mouse movement parallax effect (only on home page)
-            document.addEventListener('mousemove', (e) => {
-                if (document.getElementById('home').classList.contains('active')) {
-                    const cards = document.querySelectorAll('.project-card');
-                    const mouseX = e.clientX / window.innerWidth;
-                    const mouseY = e.clientY / window.innerHeight;
-
-                    cards.forEach((card, index) => {
-                        const intensity = (index % 3 + 1) * 2;
-                        const x = (mouseX - 0.5) * intensity;
-                        const y = (mouseY - 0.5) * intensity;
-                        card.style.transform = `translate(${x}px, ${y}px)`;
-                    });
-                }
+            // Observe project cards
+            document.querySelectorAll('.project-card').forEach(card => {
+                observer.observe(card);
             });
 
-            // Reset transform on mouse leave
-            document.addEventListener('mouseleave', () => {
-                document.querySelectorAll('.project-card').forEach(card => {
-                    card.style.transform = '';
+            // Add hover effects for project cards
+            document.querySelectorAll('.project-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
                 });
             });
-            
-            // Handle browser back/forward buttons
-            window.addEventListener('popstate', function(e) {
-                if (e.state && e.state.page) {
-                    showPage(e.state.page);
-                } else {
-                    showPage('home');
-                }
-            });
-            
-            // Update browser history when navigating
-            const originalShowPage = showPage;
-            showPage = function(pageId) {
-                originalShowPage(pageId);
-                history.pushState({page: pageId}, '', `#${pageId}`);
-            };
-        });
 
-        // Smooth scrolling for internal links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+            // Add navigation scroll effect
+            window.addEventListener('scroll', function() {
+                const nav = document.querySelector('.nav');
+                if (window.scrollY > 50) {
+                    nav.style.background = 'rgba(15, 23, 42, 0.98)';
+                    nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.4)';
+                } else {
+                    nav.style.background = 'rgba(15, 23, 42, 0.95)';
+                    nav.style.boxShadow = 'none';
                 }
             });
         });
     </script>
 </body>
-</html>">Year</div>
-                            <div class="meta-value">2024</div>
-                        </div>
-                        <div class="meta-item">
-                            <div class="meta-label">Role</div>
-                            <div class="meta-value">Creative Director</div>
-                        </div>
-                        <div class="meta-item">
-                            <div class="meta-label">Duration</div>
-                            <div class="meta-value">3 Months</div>
-                        </div>
-                        <div class="meta-item">
-                            <div class="meta-label">Team</div>
-                            <div class="meta-value">5 People</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-hero-image">
-                    <!-- Replace with your actual project hero image -->
-                    <img src="https://via.placeholder.com/1200x500/667eea/ffffff?text=Nexus+Brand+Identity+Hero" alt="Nexus Brand Identity Hero Image" />
-                </div>
-
-                <div class="project-content">
-                    <div class="content-sidebar">
-                        <h3>Challenge</h3>
-                        <p>Nexus needed a complete brand overhaul to position themselves as a leader in the competitive tech startup space. The challenge was creating an identity that felt both innovative and trustworthy.</p>
-                        
-                        <h3>Solution</h3>
-                        <p>We developed a comprehensive brand identity system that combined modern aesthetics with meaningful symbolism, creating a cohesive visual language across all touchpoints.</p>
-                    </div>
-                    
-                    <div class="content-main">
-                        <div class="content-section">
-                            <h3>Brand Strategy</h3>
-                            <p>The brand strategy focused on three core pillars: Innovation, Connection, and Growth. We conducted extensive market research and competitor analysis to identify unique positioning opportunities.</p>
-                            <p>Through stakeholder interviews and brand workshops, we discovered that Nexus's true differentiator was their ability to create meaningful connections between technology and human experiences.</p>
-                        </div>
-                        
-                        <div class="content-section">
-                            <h3>Visual Identity</h3>
-                            <p>The logo design represents the concept of connection and networking through geometric forms that suggest both technological precision and organic growth. The color palette combines deep blues with vibrant accents to convey trust and innovation.</p>
-                            <p>We created a flexible visual system that works across digital and print applications, ensuring consistent brand recognition across all customer touchpoints.</p>
-                        </div>
-
-                        <!-- Video Example -->
-                        <div class="video-container">
-                            <!-- Option 1: YouTube/Vimeo Embed -->
-                            <!-- <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe> -->
-                            
-                            <!-- Option 2: Direct Video File -->
-                            <!-- <video controls poster="path/to/video-thumbnail.jpg">
-                                <source src="path/to/your-video.mp4" type="video/mp4">
-                                <source src="path/to/your-video.webm" type="video/webm">
-                                Your browser does not support the video tag.
-                            </video> -->
-                            
-                            <!-- Placeholder for now -->
-                            <div style="display: flex; align-items: center; justify-content: center; height: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-size: 1.2rem;">
-                                Add your project video here
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-gallery">
-                    <!-- Replace these with your actual gallery images -->
-                    <div class="gallery-item">
-                        <img src="https://via.placeholder.com/400x300/667eea/ffffff?text=Gallery+Image+1" alt="Project Gallery Image 1" />
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://via.placeholder.com/400x300/764ba2/ffffff?text=Gallery+Image+2" alt="Project Gallery Image 2" />
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://via.placeholder.com/400x300/667eea/ffffff?text=Gallery+Image+3" alt="Project Gallery Image 3" />
-                    </div>
-                </div>
-
-                <div class="content-section">
-                    <h3>Results</h3>
-                    <p>The new brand identity resulted in a 150% increase in brand recognition and a 45% improvement in customer engagement metrics. The cohesive visual system has been successfully implemented across all digital platforms and marketing materials.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- PROJECT 2 PAGE -->
-    <div class="page" id="project2">
-        <div class="container">
-            <div class="project-detail">
-                <a href="#" class="back-button" onclick="showPage('home')">← Back to Work</a>
-                
-                <div class="project-header">
-                    <h1>Elevate Digital Platform</h1>
-                    <p class="project-subtitle">Comprehensive digital platform for fitness and wellness</p>
-                    
-                    <div class="project-meta">
-                        <div class="meta-item">
-                            <div class="meta-label">Year</div>
-                            <div class="meta-value">2024</div>
-                        </div>
-                        <div class="meta-item">
-                            <div class="meta-label">Role</div>
-                            <div class="meta-value">UX/UI Designer</div>
-                        </div>
-                        <div class="meta-item">
-                            <div class="meta-label">Duration</div>
-                            <div class="meta-value">4 Months</div>
-                        </div>
-                        <div class="meta-item">
-                            <div class="meta-label">Platform</div>
-                            <div class="meta-value">Web & Mobile</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-hero-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
-
-                <div class="project-content">
-                    <div class="content-sidebar">
-                        <h3>Challenge</h3>
-                        <p>Elevate needed a digital platform that could seamlessly integrate workout planning, nutrition tracking, and community features while maintaining an intuitive user experience.</p>
-                        
-                        <h3>Approach</h3>
-                        <p>We conducted extensive user research and usability testing to understand the complex needs of fitness enthusiasts and create a platform that truly serves their goals.</p>
-                    </div>
-                    
-                    <div class="content-main">
-                        <div class="content-section">
-                            <h3>User Research</h3>
-                            <p>Through interviews with 50+ fitness enthusiasts, we identified key pain points in existing platforms: overwhelming interfaces, lack of personalization, and poor community integration.</p>
-                            <p>Our research revealed that users wanted a platform that felt more like a personal trainer and less like a generic fitness app.</p>
-                        </div>
-                        
-                        <div class="content-section">
-                            <h3>Design System</h3>
-                            <p>We developed a comprehensive design system focused on motivation and clarity. The interface uses bold colors and clear typography to create an energizing yet calming experience.</p>
-                            <p>The modular component system ensures consistency across web and mobile platforms while allowing for platform-specific optimizations.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-gallery">
-                    <div class="gallery-item" style="background: linear-gradient(45deg, #f093fb, #f5576c);"></div>
-                    <div class="gallery-item" style="background: linear-gradient(45deg, #f5576c, #f093fb);"></div>
-                    <div class="gallery-item" style="background: linear-gradient(45deg, #f093fb, #f5576c);"></div>
-                </div>
-
-                <div class="content-section">
-                    <h3>Impact</h3>
-                    <p>The platform launched with over 10,000 beta users and achieved a 85% user retention rate in the first month. User engagement increased by 200% compared to the previous platform.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- PROJECT 3 PAGE -->
-    <div class="page" id="project3">
-        <div class="container">
-            <div class="project-detail">
-                <a href="#" class="back-button" onclick="showPage('home')">← Back to Work</a>
-                
-                <div class="project-header">
-                    <h1>Aurora Creative Campaign</h1>
-                    <p class="project-subtitle">Award-winning multimedia campaign for sustainable fashion</p>
-                    
-                    <div class="project-meta">
-                        <div class="meta-item">
-                            <div class="meta-label">Year</div>
-                            <div class="meta-value">2023</div>
-                        </div>
-                        <div class="meta-item">
-                            <div class="meta-label">Role</div>
-                            <div class="meta-value">Art Director</div>
-                        </div>
-                        <div class="meta-item">
-                            <div class="meta-label">Duration</div>
-                            <div class="meta-value">6 Months</div>
-                        </div>
-                        <div class="meta-item">
-                            <div class="meta-label">Awards</div>
-                            <div class="meta-value">Gold Cannes Lion</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-hero-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
-
-                <div class="project-content">
-                    <div class="content-sidebar">
-                        <h3>Brief</h3>
-                        <p>Create a campaign that would shift consumer perception of sustainable fashion from "compromise" to "aspiration" while driving measurable brand awareness and sales.</p>
-                        
-                        <h3>Strategy</h3>
-                        <p>We developed an integrated campaign that combined stunning visuals with compelling storytelling to showcase the beauty and innovation of sustainable fashion.</p>
-                    </div>
-                    
-                    <div class="content-main">
-                        <div class="content-section">
-                            <h3>Concept Development</h3>
-                            <p>The "Aurora" concept was inspired by the natural phenomenon of the northern lights - something beautiful, rare, and worth waiting for. This became our metaphor for sustainable fashion.</p>
-                            <p>We created a visual language that combined ethereal beauty with technical precision, reflecting both the artistry and science behind sustainable fashion.</p>
-                        </div>
-                        
-                        <div class="content-section">
-                            <h3>Execution</h3>
-                            <p>The campaign spanned multiple touchpoints including print, digital, outdoor advertising, and experiential installations. Each piece maintained the Aurora aesthetic while telling different aspects of the sustainability story.</p>
-                            <p>We partnered with influential photographers and created custom lighting techniques to achieve the signature Aurora glow effect that became synonymous with the brand.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-gallery">
-                    <div class="gallery-item" style="background: linear-gradient(45deg, #4facfe, #00f2fe);"></div>
-                    <div class="gallery-item" style="background: linear-gradient(45deg, #00f2fe, #4facfe);"></div>
-                    <div class="gallery-item" style="background: linear-gradient(45deg, #4facfe, #00f2fe);"></div>
-                </div>
-
-                <div class="content-section">
-                    <h3>Recognition</h3>
-                    <p>The Aurora campaign won a Gold Cannes Lion for Design and was featured in over 20 international design publications. Brand awareness increased by 340% and sales grew by 180% during the campaign period.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- PROJECT 4 PAGE -->
-    <div class="page" id="project4">
-        <div class="container">
-            <div class="project-detail">
-                <a href="#" class="back-button" onclick="showPage('home')">← Back to Work</a>
-                
-                <div class="project-header">
-                    <h1>Flow Motion Graphics</h1>
-                    <p class="project-subtitle">Dynamic motion design series for brand storytelling</p>
-                    
-                    <div class="project-meta">
-                        <div class="meta-item">
-                            <div class="meta-label
+</html>
